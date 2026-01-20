@@ -12,6 +12,19 @@ const config: StorybookConfig = {
     "@storybook/addon-docs",
     "@storybook/addon-onboarding"
   ],
-  "framework": "@storybook/react-vite"
+  "framework": "@storybook/react-vite",
+  
+  // Add this to allow tunnel access (ngrok, cloudflare, etc.)
+  async viteFinal(config) {
+    return {
+      ...config,
+      server: {
+        ...config.server,
+        host: true, // Allow external access
+        strictPort: false,
+      },
+    };
+  },
 };
+
 export default config;
